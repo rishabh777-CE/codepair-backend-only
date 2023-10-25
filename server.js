@@ -13,6 +13,8 @@ const io=new Server(server);
 const userSocketMap={};//at runtime
 connectToDatabase();
 
+const job= require('~/cron.js');
+job.start();
 
 function getClients(roomID) {
    return Array.from(io.sockets.adapter.rooms.get(roomID)||[]).map(
