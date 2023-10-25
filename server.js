@@ -13,8 +13,14 @@ const io=new Server(server);
 const userSocketMap={};//at runtime
 connectToDatabase();
 
-const job= require('~/cron.js');
-job.start();
+const cron = require('node-cron');
+
+function myCronJob() {
+  // Your cron job logic goes here
+  console.log('Running cron job...');
+}
+
+cron.schedule('* * * * *', myCronJob);
 
 function getClients(roomID) {
    return Array.from(io.sockets.adapter.rooms.get(roomID)||[]).map(
